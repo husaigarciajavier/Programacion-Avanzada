@@ -1,0 +1,99 @@
+# Documentación del Sistema de Adquisición de Datos
+
+## 1. Importaciones y Configuración Inicial
+
+Importa las librerías necesarias para manejo de argumentos, archivos CSV/JSON, operaciones con el sistema, tiempos, matemáticas, estadísticas y archivos temporales. Además, intenta cargar matplotlib y numpy para gráficos, pero si no están disponibles, el programa continúa sin ellos.
+
+---
+
+## 2. Utilidades Básicas
+
+- **`iso_now_utc()`**  
+  Genera una marca de tiempo en formato ISO 8601 con zona horaria UTC.
+
+- **`ensure_results_dir()`**  
+  Crea la carpeta "results" si no existe.
+
+- **`safe_write_atomic()`**  
+  Escribe archivos de forma segura usando un archivo temporal y luego renombrando, evitando corrupción si el proceso se interrumpe.
+
+---
+
+## 3. Simulación y Lectura de Datos
+
+- **`simulate_reading()`**  
+  Genera datos simulados de temperatura (con deriva lenta y ruido) y de un sensor LDR (con variaciones senoidales y picos ocasionales de luz).
+
+- **`parse_serial_line()`**  
+  Interpreta una línea recibida por puerto serial con formato `"temperatura,ldr"` y la convierte a números.
+
+---
+
+## 4. Adquisición de Datos
+
+- **`acquire_data()`**  
+  Controla el proceso de captura de datos durante el tiempo especificado, ya sea desde simulación o desde puerto serial real. Registra cada lectura con su timestamp y maneja errores de comunicación.
+
+---
+
+## 5. Procesamiento Estadístico
+
+- **`compute_basic_stats()`**  
+  Calcula estadísticas básicas (media, mínimo, máximo, desviación estándar) de una lista de valores, ignorando automáticamente los valores no válidos como NaN.
+
+---
+
+## 6. Guardado de Datos
+
+- **`save_csv()`**  
+  Guarda todas las lecturas en un archivo CSV con columnas de timestamp, temperatura y LDR.
+
+- **`save_metadata()`**  
+  Guarda en formato JSON la configuración utilizada y las estadísticas calculadas.
+
+- **`save_environment()`**  
+  Registra información del entorno de ejecución como versión de Python y librerías disponibles.
+
+---
+
+## 7. Visualización
+
+- **`plot_readings()`**  
+  Genera una gráfica combinada con dos escalas Y, mostrando la evolución temporal de temperatura (eje izquierdo) y LDR (eje derecho), guardándola como imagen PNG.
+
+---
+
+## 8. Interfaz de Línea de Comandos
+
+- **`build_argparser()`**  
+  Configura los argumentos que el usuario puede pasar al ejecutar el programa, permitiendo elegir modo (simulación o serial), puerto, velocidad, duración e intervalo de muestreo.
+
+---
+
+## 9. Flujo Principal
+
+- **`main()`**  
+  Coordina todo el proceso:
+  1. Crea la carpeta de resultados
+  2. Guarda información del entorno
+  3. Ejecuta la adquisición de datos
+  4. Calcula estadísticas
+  5. Guarda los archivos CSV, JSON y gráfico
+  6. Muestra un resumen en consola con las estadísticas calculadas
+
+---
+
+## Flujo General
+
+El programa captura datos de temperatura y LDR durante un período configurable, los procesa estadísticamente, los guarda en múltiples formatos:
+
+| Formato | Descripción |
+|---------|-------------|
+| **CSV** | Datos crudos para análisis posterior |
+| **JSON** | Metadatos con configuración y estadísticas |
+| **PNG** | Visualización gráfica de los datos |
+
+Puede funcionar con:
+- **Datos simulados** (modo `sim`)
+- **Sensor real** conectado por puerto serial (modo `serial`)
+
