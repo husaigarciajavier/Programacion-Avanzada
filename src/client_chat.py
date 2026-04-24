@@ -1,126 +1,143 @@
 import socket
-import threading
-import logging
-import argparse
 import os
-from datetime import datetime
+import sys
+import io
+import logging
+from file_transfer import get_file_metadata
 
-# Crear carpeta de logs si no existe
-os.makedirs('results/logs', exist_ok=True)
+# Forzar UTF-8 en consola Windows
+if sys.platform == "win32":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
-# Configuración de logging
+# Configuración de rutas para logs
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+LOGS_DIR = os.path.join(BASE_DIR, "results", "logs")
+os.makedirs(LOGS_DIR, exist_ok=True)
+
 logging.basicConfig(
     level=logging.INFO,
     format='[%(asctime)s] %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S',
     handlers=[
-        logging.FileHandler('results/logs/client.log'),
+        logging.FileHandler(os.path.join(LOGS_DIR, 'client.log')),
         logging.StreamHandler()
     ]
 )
+
+def print_separator(char="=", length=50):
+    """Imprime una línea separadora."""
+    print(char * length)
+
+def print_header(title):
+    """Imprime un título formateado."""
+    print_separator()
+    print(f"  {title}")
+    print_separator()
+
+def print_info(label, value=""):
+    """Imprime información con formato etiqueta: valor."""
+    if value:
+        print(f"  [{label}] {value}")
+    else:
+        print(f"  {label}")
+
+def format_size(bytes_size):
+    """Convierte bytes a formato legible."""
+    if bytes_size < 1024:
+        return f"{bytes_size} B"
+    elif bytes_size < 1024 * 1024:
+        return f"{bytes_size / 1024:.1f} KB"
+    else:
+        return f"{bytes_size / (1024 * 1024):.1f} MB"
 
 class ChatClient:
     def __init__(self, host='127.0.0.1', port=5000):
         self.host = host
         self.port = port
-        self.client_socket = None
-        self.running = False
-        
-    def connect(self):
-        """Conecta al servidor."""
-        try:
-            self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.client_socket.connect((self.host, self.port))
-            self.running = True
-            
-            logging.info(f"[OK] Conectado al servidor {self.host}:{self.port}")
-            
-            self.chat_loop()
-            
-        except ConnectionRefusedError:
-            logging.error(f"[ERROR] No se pudo conectar a {self.host}:{self.port}. Asegurate de que el servidor este ejecutandose.")
-        except socket.gaierror:
-            logging.error(f"[ERROR] Direccion IP invalida: {self.host}")
-        except Exception as e:
-            logging.error(f"[ERROR] {e}")
-        finally:
-            self.stop()
-    
-    def chat_loop(self):
-        """Bucle principal del chat."""
-        receive_thread = threading.Thread(target=self.receive_messages)
-        receive_thread.daemon = True
-        receive_thread.start()
-        
-        print("\n" + "="*50)
-        print("CHAT INICIADO - Escribe '-salir-' para terminar")
-        print("="*50 + "\n")
-        
-        try:
-            while self.running:
-                message = input("Tu: ")
-                
-                if message.lower() == '-salir-':
-                    logging.info("[*] Chat finalizado por el cliente")
-                    break
-                    
-                if message.strip():
-                    timestamp = datetime.now().strftime("%H:%M:%S")
-                    full_message = f"[{timestamp}] Cliente: {message}"
-                    self.client_socket.send(full_message.encode('utf-8'))
-                    logging.info(f"[>>>] {message}")
-                    
-        except (ConnectionResetError, BrokenPipeError):
-            logging.warning("[!] Servidor desconectado inesperadamente")
-        except Exception as e:
-            logging.error(f"[ERROR] {e}")
-        finally:
-            self.stop()
-    
-    def receive_messages(self):
-        """Recibe mensajes del servidor en un hilo separado."""
-        try:
-            while self.running:
-                data = self.client_socket.recv(1024)
-                
-                if not data:
-                    logging.info("[*] Servidor cerro la conexion")
-                    self.running = False
-                    break
-                    
-                message = data.decode('utf-8')
-                print(f"\n{message}")
-                print("Tu: ", end='', flush=True)
-                logging.info(f"[<<<] {message}")
-                
-        except (ConnectionResetError, ConnectionAbortedError):
-            logging.info("[*] Servidor desconectado")
-        except Exception as e:
-            logging.error(f"[ERROR] {e}")
-        finally:
-            self.running = False
-    
-    def stop(self):
-        """Detiene el cliente y cierra la conexion."""
-        self.running = False
-        
-        if self.client_socket:
-            try:
-                self.client_socket.close()
-            except:
-                pass
-                
-        logging.info("[*] Cliente desconectado")
+        self.BUFFER_SIZE = 4096
 
-def main():
-    parser = argparse.ArgumentParser(description='Cliente de Chat Punto a Punto')
-    parser.add_argument('--host', default='127.0.0.1', help='Direccion IP del servidor')
-    parser.add_argument('--port', type=int, default=5000, help='Puerto del servidor')
-    
-    args = parser.parse_args()
-    
-    client = ChatClient(host=args.host, port=args.port)
-    client.connect()
+    def connect(self):
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            # --- PANTALLA DE CONEXION ---
+            print_header("CLIENTE DE CHAT PUNTO A PUNTO - Wi-Fi")
+            print_info("Conectando a", f"{self.host}:{self.port}")
+            
+            s.connect((self.host, self.port))
+            
+            print_info("Estado", "CONECTADO")
+            print_separator("-")
+            print_info("Comandos disponibles:")
+            print_info("  mensaje", "Enviar texto al servidor")
+            print_info("  /enviar RUTA", "Enviar archivo al servidor")
+            print_info("  salir", "Finalizar chat")
+            print_separator("=")
+            
+            while True:
+                msg = input("  [TU] > ")
+                
+                if msg.lower() == 'salir':
+                    print_info("Chat finalizado", "")
+                    break
+                
+                if msg.startswith('/enviar '):
+                    path = msg.split(' ', 1)[1]
+                    self.send_file(s, path)
+                    print_separator("-")
+                elif msg.strip():
+                    s.sendall(msg.encode('utf-8'))
+                    logging.info(f"[>>>] {msg}")
+
+    def send_file(self, sock, path):
+        """Envia un archivo al servidor con barra de progreso."""
+        meta = get_file_metadata(path)
+        if not meta:
+            print_info("ERROR", "Archivo no encontrado: " + path)
+            return
+
+        # --- PANTALLA DE ENVIO ---
+        print_separator("-")
+        print_header("ENVIANDO ARCHIVO")
+        print_info("Nombre", meta['name'])
+        print_info("Tamaño", format_size(meta['size']))
+        print_info("Hash SHA256", f"{meta['checksum'][:32]}...")
+        print_separator("-")
+
+        header = f"FILE_CMD|{meta['name']}|{meta['size']}|{meta['checksum']}"
+        sock.sendall(header.encode('utf-8'))
+        logging.info(f"[FILE] Enviando encabezado: {meta['name']}")
+
+        ack = sock.recv(1024).decode('utf-8')
+        if ack == "READY":
+            print_info("Servidor", "Listo para recibir")
+            print_info("Enviando datos", "0%")
+            
+            # Lectura y envío con indicador de progreso
+            with open(path, "rb") as f:
+                file_data = f.read()
+                total_size = len(file_data)
+                chunk_size = 8192
+                sent = 0
+                
+                for i in range(0, total_size, chunk_size):
+                    chunk = file_data[i:i + chunk_size]
+                    sock.sendall(chunk)
+                    sent += len(chunk)
+                    progress = int((sent / total_size) * 100)
+                    print(f"\r  [PROGRESO] {progress}% ({format_size(sent)} / {format_size(total_size)})", end='', flush=True)
+            
+            print()  # Nueva línea después de la barra
+            
+            # Recibir resultado
+            result = sock.recv(1024).decode('utf-8')
+            print_info("Resultado", result)
+            
+            if result == "OK_VERIFIED":
+                print_info("Transferencia", "EXITOSA - Archivo verificado por el servidor")
+            else:
+                print_info("Transferencia", "FALLIDA - Error de integridad")
+            
+            logging.info(f"[FILE] Resultado: {result}")
 
 if __name__ == "__main__":
-    main()
+    ChatClient().connect()
