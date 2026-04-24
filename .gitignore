@@ -1,0 +1,84 @@
+# ============================================================
+# .gitignore - Chat Punto a Punto Wi-Fi
+# ============================================================
+
+# --- PYTHON ---
+# Archivos compilados
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Entornos virtuales
+venv/
+env/
+.venv/
+.env/
+virtualenv/
+
+# Distribución y empaquetado
+*.egg-info/
+*.egg
+dist/
+build/
+*.exe
+*.msi
+
+# --- JUPYTER NOTEBOOKS (si se usaran) ---
+.ipynb_checkpoints/
+*.ipynb
+
+# --- IDE Y EDITORES DE TEXTO ---
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# Vim
+*.swp
+*.swo
+*~
+
+# --- ARCHIVOS DE LOGS Y RESULTADOS LOCALES ---
+# Los logs se generan automáticamente al ejecutar
+results/logs/*.log
+
+# Archivos recibidos en pruebas (para no subir basura)
+results/received/*
+!results/received/.gitkeep
+
+# --- ARCHIVOS SENSIBLES ---
+# Credenciales o configuraciones personales
+.env
+.env.local
+config.ini
+secrets.json
+*.key
+*.pem
+
+# --- ARCHIVOS TEMPORALES ---
+*.tmp
+*.temp
+*.bak
+*.cache
+*.log
+
+# --- OTROS ---
+# Si usas PyInstaller
+*.spec
+build/
+dist/
+
+# Archivos de prueba grandes (> 10 MB)
+*.zip
+*.rar
+*.7z
+*.tar.gz
