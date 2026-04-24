@@ -56,10 +56,6 @@ Usados temporalmente por aplicaciones cliente. El sistema operativo los asigna a
 - **Port forwarding:** Solución manual abriendo puertos en el router.
 - **NAT traversal:** UPnP, STUN/TURN (usado en WebRTC, juegos).
 
-> Para conectar dos redes distintas tras NAT sin configuración, se necesita un servidor intermediario o técnicas como NAT traversal.
-
----
-
 ## Firewalls y permisos de puerto
 
 Un firewall filtra tráfico basado en reglas (puerto, IP, protocolo).
