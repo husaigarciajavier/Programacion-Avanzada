@@ -22,4 +22,5 @@ def get_file_metadata(file_path):
         "name": os.path.basename(file_path),
         "size": os.path.getsize(file_path),
         "checksum": calculate_sha256(file_path)
+        
     }
