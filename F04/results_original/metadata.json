@@ -1,0 +1,28 @@
+{
+  "timestamp": "2026-03-26T00:14:36Z",
+  "config": {
+    "mode": "sim",
+    "port": null,
+    "baud": 115200,
+    "duration_seconds": 60,
+    "sample_interval_s": 1,
+    "script": "run_acquisition.py",
+    "version": "1.0.1"
+  },
+  "stats": {
+    "temperature": {
+      "mean": 22.3,
+      "min": 21.55,
+      "max": 22.9,
+      "std": 0.282,
+      "count": 60
+    },
+    "ldr": {
+      "mean": 427.55,
+      "min": 383,
+      "max": 658,
+      "std": 35.895,
+      "count": 60
+    }
+  }
+}
