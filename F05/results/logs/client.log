@@ -1,0 +1,123 @@
+[2026-04-20 04:06:31] [OK] Conectado al servidor 127.0.0.1:5000
+[2026-04-20 04:06:38] [>>>] hola
+[2026-04-20 04:06:49] [<<<] [04:06:49] Servidor: holhola
+[2026-04-20 04:07:02] [*] Servidor desconectado
+[2026-04-20 04:07:13] [*] Cliente desconectado
+[2026-04-20 04:07:13] [*] Cliente desconectado
+[2026-04-20 04:07:15] [OK] Conectado al servidor 127.0.0.1:5000
+[2026-04-20 04:07:23] [>>>] voy a salir temprano
+[2026-04-20 04:08:42] [*] Chat finalizado por el cliente
+[2026-04-20 04:08:42] [*] Servidor desconectado
+[2026-04-20 04:08:42] [*] Cliente desconectado
+[2026-04-20 04:08:42] [*] Cliente desconectado
+[2026-04-20 04:08:48] [ERROR] No se pudo conectar a 127.0.0.1:5000. Asegurate de que el servidor este ejecutandose.
+[2026-04-20 04:08:48] [*] Cliente desconectado
+[2026-04-20 04:09:03] [OK] Conectado al servidor 127.0.0.1:5000
+[2026-04-20 04:09:12] [*] Chat finalizado por el cliente
+[2026-04-20 04:09:12] [*] Servidor desconectado
+[2026-04-20 04:09:12] [*] Cliente desconectado
+[2026-04-20 04:09:12] [*] Cliente desconectado
+[2026-04-20 04:09:23] [OK] Conectado al servidor 127.0.0.1:5000
+[2026-04-20 04:09:26] [>>>] salir
+[2026-04-20 04:09:46] [*] Chat finalizado por el cliente
+[2026-04-20 04:09:46] [*] Cliente desconectado
+[2026-04-20 04:09:46] [*] Servidor desconectado
+[2026-04-20 04:09:46] [*] Cliente desconectado
+[2026-04-20 04:09:53] [OK] Conectado al servidor 127.0.0.1:5000
+[2026-04-20 12:52:05] [<<<] [12:52:05] Servidor: lol
+[2026-04-20 12:53:47] [*] Chat finalizado por el cliente
+[2026-04-20 12:53:47] [*] Cliente desconectado
+[2026-04-20 12:53:47] [*] Servidor desconectado
+[2026-04-20 12:53:47] [*] Cliente desconectado
+[2026-04-20 12:55:00] [OK] Conectado al servidor 127.0.0.1:5000
+[2026-04-20 12:55:18] [<<<] [12:55:18] Servidor: lol
+[2026-04-20 13:00:54] [<<<] [13:00:54] Servidor: pppooolkjñlkjkl´polpoilpp0ppllppñll´ñlmñpuiuiuuppp   kjhiiu9oooñlk-{-´ppiyuiiuyrytu++
+[2026-04-20 13:24:17] [<<<] [13:24:17] Servidor: oikjiu8/t8			
+[2026-04-20 13:24:41] [<<<] [13:24:41] Servidor: 	-salir-			
+[2026-04-20 13:24:42] [<<<] [13:24:42] Servidor: }
+[2026-04-20 13:24:49] [*] Servidor desconectado
+[2026-04-20 13:24:53] [*] Cliente desconectado
+[2026-04-20 13:24:53] [*] Cliente desconectado
+[2026-04-20 14:17:00] [OK] Conectado al servidor 127.0.0.1:5000
+[2026-04-20 14:17:00] [*] Servidor desconectado
+[2026-04-20 14:31:48] [!] Servidor desconectado inesperadamente
+[2026-04-20 14:31:48] [*] Cliente desconectado
+[2026-04-20 14:31:48] [*] Cliente desconectado
+[2026-04-20 14:31:55] [OK] Conectado al servidor 127.0.0.1:5000
+[2026-04-20 14:31:59] [*] Servidor desconectado
+[2026-04-23 00:48:04] [*] Conectando a 127.0.0.1:5000...
+[2026-04-23 00:48:04] [OK] Conectado al servidor 127.0.0.1:5000
+[2026-04-23 00:48:18] [>>>] ola
+[2026-04-23 00:48:21] [<<<] [00:48:21] Servidor: adios
+[2026-04-23 00:48:45] [TRANSFER] Enviando 'Calendario_2026.pdf' (139757 bytes)
+[2026-04-23 00:48:45] [<<<] READY
+
+[2026-04-23 00:52:42] [*] Servidor cerro la conexion
+[2026-04-23 00:52:42] [*] Cliente desconectado
+[2026-04-23 00:52:42] [*] Cliente desconectado
+[2026-04-23 00:53:05] [*] Conectando a 127.0.0.1:5000...
+[2026-04-23 00:53:05] [OK] Conectado al servidor 127.0.0.1:5000
+[2026-04-23 00:53:09] [TRANSFER] Enviando 'Calendario_2026.pdf' (139757 bytes)
+[2026-04-23 00:53:09] [<<<] READY
+
+[2026-04-23 00:53:25] [<<<] 00:53:25] Servidor: |
+[2026-04-23 00:53:27] [<<<] 00:53:27] Servidor: a
+[2026-04-23 00:53:33] [*] Servidor cerro la conexion
+[2026-04-23 00:53:33] [*] Cliente desconectado
+[2026-04-23 00:53:33] [*] Cliente desconectado
+[2026-04-23 01:17:51] [*] Cliente desconectado
+[2026-04-23 16:14:47] [*] Conectando a 127.0.0.1:5000...
+[2026-04-23 16:14:50] [ERROR] Conexion rechazada en 127.0.0.1:5000. Verifica IP y puerto.
+[2026-04-23 16:14:50] [*] Cliente desconectado
+[2026-04-23 16:15:08] [*] Conectando a 127.0.0.1:5000...
+[2026-04-23 16:15:08] [OK] Conectado al servidor 127.0.0.1:5000
+[2026-04-23 16:15:10] [>>>] dalksjdlksajdlka
+[2026-04-23 16:15:12] [>>>] ola lol
+[2026-04-24 01:53:26] [>>>] |a
+[2026-04-24 01:53:30] [*] Servidor cerro la conexion
+[2026-04-24 01:53:34] [*] Cliente desconectado
+[2026-04-24 01:53:34] [*] Cliente desconectado
+[2026-04-24 01:54:12,605] [OK] Conectado a 127.0.0.1:5000
+[2026-04-24 01:59:13,505] [*] Cliente desconectado
+[2026-04-24 01:59:13,505] [*] Cliente desconectado
+[2026-04-24 02:20:55] [>>>] aaa
+[2026-04-24 02:21:34] [>>>] uwu
+[2026-04-24 02:23:34] [>>>] a
+[2026-04-24 02:23:40] [>>>] a
+[2026-04-24 02:24:43] [FILE] Enviando encabezado: organizador_grafico2.md (7003 bytes)
+[2026-04-24 02:24:43] [FILE] Servidor listo. Transfiriendo datos...
+[2026-04-24 02:24:43] [FILE] Resultado: OK_VERIFIED
+[2026-04-24 02:25:15] [FILE] Enviando encabezado: Calendario_2026.pdf (139757 bytes)
+[2026-04-24 02:25:15] [FILE] Servidor listo. Transfiriendo datos...
+[2026-04-24 02:25:15] [FILE] Resultado: OK_VERIFIED
+[2026-04-24 02:27:05] [FILE] Enviando encabezado: organizador_grafico2.md (7003 bytes)
+[2026-04-24 02:27:05] [FILE] Servidor listo. Transfiriendo datos...
+[2026-04-24 02:27:05] [FILE] Resultado: OK_VERIFIED
+[2026-04-24 02:29:07] [>>>] hola
+[2026-04-24 02:29:18] [>>>] a
+[2026-04-24 02:29:52] [FILE] Enviando encabezado: LecturasIR.txt (1263 bytes)
+[2026-04-24 02:31:08] [OK] Conectado a 127.0.0.1:5000
+[2026-04-24 02:31:14] [FILE] Encabezado enviado: LecturasIR.txt (1263 bytes)
+[2026-04-24 02:31:14] [<<<] READY
+[2026-04-24 02:35:02] [*] Cliente desconectado
+[2026-04-24 02:37:10] [>>>] holla
+[2026-04-24 02:37:16] [<<<] [02:37:16] Servidor: waos
+[2026-04-24 02:37:26] [FILE] Solicitando envío: LecturasIR.txt (1263 bytes)
+[2026-04-24 02:37:26] [FILE] Respuesta: READY
+[2026-04-24 02:38:02] [>>>] e
+[2026-04-24 02:38:34] [FILE] Solicitando envío: Gemini_Generated_Image_599r3l599r3l599r.png (2534965 bytes)
+[2026-04-24 02:39:12] [*] Servidor desconectado
+[2026-04-24 02:39:28] [FILE] Solicitando envío: Gemini_Generated_Image_599r3l599r3l599r.png (2534965 bytes)
+[2026-04-24 02:39:28] [FILE] Respuesta: READY
+[2026-04-24 02:40:07] [CMD] Servidor envió: SALIR
+[2026-04-24 02:41:20] [FILE] Enviando encabezado: Gemini_Generated_Image_599r3l599r3l599r.png (2534965 bytes)
+[2026-04-24 02:41:20] [FILE] Servidor listo. Transfiriendo datos...
+[2026-04-24 02:41:20] [FILE] Resultado: OK_VERIFIED
+[2026-04-24 02:45:38] [>>>] olaaa
+[2026-04-24 02:45:39] [>>>] lol
+[2026-04-24 02:45:51] [FILE] Enviando encabezado: LecturasIR.txt
+[2026-04-24 02:45:51] [FILE] Resultado: OK_VERIFIED
+[2026-04-24 02:46:15] [FILE] Enviando encabezado: Calendario_2026.pdf
+[2026-04-24 02:46:15] [FILE] Resultado: OK_VERIFIED
+[2026-04-24 03:01:47] [FILE] Enviando encabezado: Calendario_2026.pdf
+[2026-04-24 03:01:47] [FILE] Resultado: OK_VERIFIED

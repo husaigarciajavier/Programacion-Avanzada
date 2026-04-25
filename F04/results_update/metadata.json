@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-03-27T06:32:22Z",
+  "config": {
+    "mode": "sim",
+    "port": null,
+    "baud": 115200,
+    "duration_seconds": 60,
+    "sample_interval_s": 1,
+    "calibration_samples": 10,
+    "script": "run_acquisition2.py",
+    "version": "1.1.0"
+  },
+  "calibration": {
+    "calibrated": true,
+    "temp_offset": -0.03,
+    "ldr_offset": 53.0,
+    "calibration_samples": 10
+  },
+  "stats": {
+    "temperature_raw": {
+      "mean": 22.306,
+      "min": 21.78,
+      "max": 22.84,
+      "std": 0.264,
+      "count": 60
+    },
+    "temperature_calibrated": {
+      "mean": 22.264,
+      "min": 21.95,
+      "max": 22.6,
+      "std": 0.187,
+      "count": 60
+    },
+    "ldr_raw": {
+      "mean": 427,
+      "min": 388,
+      "max": 645,
+      "std": 34.935,
+      "count": 60
+    },
+    "ldr_calibrated": {
+      "mean": 469.817,
+      "min": 428,
+      "max": 502,
+      "std": 20.959,
+      "count": 60
+    }
+  }
+}
