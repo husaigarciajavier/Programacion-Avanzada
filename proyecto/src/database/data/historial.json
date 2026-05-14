@@ -1,0 +1,42 @@
+[
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-05-13 21:19:55",
+        "placa": "TISDHJK",
+        "id_unico": "c9a99764-211955876",
+        "espacios_disponibles": 31,
+        "fecha_registro": "2026-05-13 21:21:42"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-05-13 21:21:27",
+        "placa": "UWUNYA",
+        "id_unico": "01c60177-212127507",
+        "espacios_disponibles": 30,
+        "fecha_registro": "2026-05-13 21:21:42"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-05-13 21:19:55",
+        "placa": "TISDHJK",
+        "id_unico": "c9a99764-211955876",
+        "espacios_disponibles": 31,
+        "fecha_registro": "2026-05-13 21:22:03"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-05-13 21:21:27",
+        "placa": "UWUNYA",
+        "id_unico": "01c60177-212127507",
+        "espacios_disponibles": 30,
+        "fecha_registro": "2026-05-13 21:22:03"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-05-13 21:23:07",
+        "placa": "SISI231",
+        "id_unico": "0b6a923a-212307976",
+        "espacios_disponibles": 29,
+        "fecha_registro": "2026-05-13 21:23:28"
+    }
+]
