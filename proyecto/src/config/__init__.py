@@ -1,0 +1,57 @@
+"""
+Módulo de configuración del proyecto Estacionamiento
+"""
+
+from src.config.constants import (
+    PROYECTO_RAIZ,
+    DATABASE_DIR,
+    LOGS_DIR,
+    CONFIG_FILE,
+    VEHICULOS_ACTIVOS_FILE,
+    HISTORIAL_FILE,
+    MOVIMIENTOS_DIA_FILE,
+    CAPACIDAD_MAXIMA_DEFECTO,
+    PRECIO_POR_HORA_DEFECTO,
+    FORMATO_FECHA_HORA,
+    FORMATO_FECHA,
+    FORMATO_HORA,
+    PLACA_REGEX,
+    MIN_CAPACIDAD,
+    MAX_CAPACIDAD,
+    MIN_PRECIO,
+    MAX_PRECIO,
+    VENTANA_TITULO,
+    VENTANA_SIZE,
+    COLOR_FONDO,
+    COLOR_BOTON,
+    COLOR_BOTON_PELIGRO,
+    COLOR_BOTON_INFO,
+    crear_directorios
+)
+
+__all__ = [
+    'PROYECTO_RAIZ',
+    'DATABASE_DIR',
+    'LOGS_DIR',
+    'CONFIG_FILE',
+    'VEHICULOS_ACTIVOS_FILE',
+    'HISTORIAL_FILE',
+    'MOVIMIENTOS_DIA_FILE',
+    'CAPACIDAD_MAXIMA_DEFECTO',
+    'PRECIO_POR_HORA_DEFECTO',
+    'FORMATO_FECHA_HORA',
+    'FORMATO_FECHA',
+    'FORMATO_HORA',
+    'PLACA_REGEX',
+    'MIN_CAPACIDAD',
+    'MAX_CAPACIDAD',
+    'MIN_PRECIO',
+    'MAX_PRECIO',
+    'VENTANA_TITULO',
+    'VENTANA_SIZE',
+    'COLOR_FONDO',
+    'COLOR_BOTON',
+    'COLOR_BOTON_PELIGRO',
+    'COLOR_BOTON_INFO',
+    'crear_directorios'
+]
