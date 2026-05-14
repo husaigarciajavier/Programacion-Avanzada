@@ -1,0 +1,29 @@
+# Dependencias del Proyecto Estacionamiento
+# Instalar con: pip install -r requirements.txt
+
+# Interfaz gráfica (viene incluida con Python, no requiere instalación)
+# tkinter - interfaz principal
+
+# Manejo de fechas y horas (incluido en Python)
+# datetime
+
+# Manejo de archivos JSON (incluido en Python)
+# json
+
+# Manejo de SQLite (incluido en Python)
+# sqlite3
+
+# Para generar IDs únicos usando UUID
+# uuid
+
+# Expresiones regulares para validación de placas
+# re
+
+# Para copias de seguridad
+# shutil
+
+# Para manejo de rutas de archivos
+# pathlib
+
+# Nota: Todas las dependencias son de la biblioteca estándar de Python
+# No requieren instalación adicional
