@@ -1,0 +1,27 @@
+{
+    "fecha_guardado": "2026-05-13 21:23:28",
+    "cantidad_vehiculos": 3,
+    "vehiculos": [
+        {
+            "id_unico": "c9a99764-211955876",
+            "placa": "TISDHJK",
+            "hora_ingreso": "2026-05-13 21:19:55",
+            "hora_salida": null,
+            "total_pagado": null
+        },
+        {
+            "id_unico": "01c60177-212127507",
+            "placa": "UWUNYA",
+            "hora_ingreso": "2026-05-13 21:21:27",
+            "hora_salida": null,
+            "total_pagado": null
+        },
+        {
+            "id_unico": "0b6a923a-212307976",
+            "placa": "SISI231",
+            "hora_ingreso": "2026-05-13 21:23:07",
+            "hora_salida": null,
+            "total_pagado": null
+        }
+    ]
+}
