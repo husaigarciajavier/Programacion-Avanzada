@@ -1,68 +1,40 @@
 """
 Manejador de Base de Datos - Persistencia de datos
-Guarda y carga automáticamente el estado del estacionamiento
 """
 
 import json
-import os
 import shutil
 from datetime import datetime
+from pathlib import Path
 from src.config.constants import (
-    DATABASE_DIR,
-    VEHICULOS_ACTIVOS_FILE,
-    HISTORIAL_FILE,
-    FORMATO_FECHA_HORA
+    DATABASE_DIR, VEHICULOS_ACTIVOS_FILE, HISTORIAL_FILE, FORMATO_FECHA_HORA
 )
 from src.models.vehiculo import Vehiculo
 
+
 class DatabaseManager:
-    """Clase para manejar la persistencia de datos"""
+    """Maneja la persistencia de datos"""
     
     def __init__(self):
-        """Inicializa el manejador de base de datos"""
-        self._verificar_directorios()
+        DATABASE_DIR.mkdir(parents=True, exist_ok=True)
     
-    def _verificar_directorios(self):
-        """Verifica que los directorios necesarios existan"""
-        if not DATABASE_DIR.exists():
-            DATABASE_DIR.mkdir(parents=True, exist_ok=True)
+    # ==================== VEHÍCULOS ACTIVOS ====================
     
-    def guardar_vehiculos_activos(self, estacionamiento):
-        """
-        Guarda los vehículos activos en un archivo JSON
-        
-        Args:
-            estacionamiento: Instancia de Estacionamiento
-        
-        Returns:
-            bool: True si se guardó correctamente
-        """
+    def guardar_vehiculos_activos(self, estacionamiento) -> bool:
+        """Guarda los vehículos activos"""
         try:
-            vehiculos_activos = estacionamiento.obtener_vehiculos_activos()
             datos = {
                 'fecha_guardado': datetime.now().strftime(FORMATO_FECHA_HORA),
-                'cantidad_vehiculos': len(vehiculos_activos),
-                'vehiculos': [v.to_dict() for v in vehiculos_activos]
+                'vehiculos': [v.to_dict() for v in estacionamiento.vehiculos_activos]
             }
-            
             with open(VEHICULOS_ACTIVOS_FILE, 'w', encoding='utf-8') as f:
                 json.dump(datos, f, indent=4, ensure_ascii=False)
-            
             return True
-        except Exception as e:
-            print(f"Error al guardar vehículos activos: {e}")
+        except Exception:
             return False
     
-    def cargar_vehiculos_activos(self, estacionamiento):
-        """
-        Carga los vehículos activos desde el archivo JSON
-        
-        Args:
-            estacionamiento: Instancia de Estacionamiento
-        
-        Returns:
-            bool: True si se cargaron correctamente
-        """
+    def cargar_vehiculos_activos(self, estacionamiento) -> bool:
+        """Carga los vehículos activos"""
         if not VEHICULOS_ACTIVOS_FILE.exists():
             return False
         
@@ -70,159 +42,103 @@ class DatabaseManager:
             with open(VEHICULOS_ACTIVOS_FILE, 'r', encoding='utf-8') as f:
                 datos = json.load(f)
             
-            # Limpiar vehículos actuales
-            estacionamiento.vehiculos.clear()
+            estacionamiento._vehiculos = {}
+            if hasattr(estacionamiento, '_placas_activas'):
+                estacionamiento._placas_activas.clear()
             
-            # Cargar vehículos
             for v_data in datos.get('vehiculos', []):
-                vehiculo = Vehiculo.from_dict(v_data)
-                estacionamiento.vehiculos[vehiculo.id_unico] = vehiculo
-            
+                v = Vehiculo.from_dict(v_data)
+                estacionamiento._vehiculos[v.id_unico] = v
+                if hasattr(estacionamiento, '_placas_activas') and v.esta_dentro:
+                    estacionamiento._placas_activas.add(v.placa)
             return True
-        except Exception as e:
-            print(f"Error al cargar vehículos activos: {e}")
+        except Exception:
             return False
     
-    def guardar_historial(self, movimiento):
-        """
-        Guarda un movimiento en el historial completo
-        
-        Args:
-            movimiento: dict con los datos del movimiento
-        
-        Returns:
-            bool: True si se guardó correctamente
-        """
-        try:
-            # Cargar historial existente
-            historial = self.cargar_historial_completo()
-            
-            # Agregar nuevo movimiento
-            movimiento['fecha_registro'] = datetime.now().strftime(FORMATO_FECHA_HORA)
-            historial.append(movimiento)
-            
-            # Guardar historial actualizado
-            with open(HISTORIAL_FILE, 'w', encoding='utf-8') as f:
-                json.dump(historial, f, indent=4, ensure_ascii=False)
-            
-            return True
-        except Exception as e:
-            print(f"Error al guardar en historial: {e}")
-            return False
+    # ==================== BACKUP (SIMPLIFICADO) ====================
     
-    def cargar_historial_completo(self):
-        """
-        Carga todo el historial de movimientos
-        
-        Returns:
-            list: Lista de movimientos
-        """
-        if not HISTORIAL_FILE.exists():
-            return []
-        
+    def crear_backup(self) -> str | None:
+        """Crea una copia de seguridad"""
         try:
-            with open(HISTORIAL_FILE, 'r', encoding='utf-8') as f:
-                return json.load(f)
-        except Exception as e:
-            print(f"Error al cargar historial: {e}")
-            return []
-    
-    def guardar_estado_completo(self, estacionamiento, registro_movimientos):
-        """
-        Guarda el estado completo del sistema
-        
-        Args:
-            estacionamiento: Instancia de Estacionamiento
-            registro_movimientos: Instancia de RegistroMovimientos
-        
-        Returns:
-            bool: True si todo se guardó correctamente
-        """
-        try:
-            # Guardar vehículos activos
-            exito1 = self.guardar_vehiculos_activos(estacionamiento)
-            
-            # Guardar configuración (ya lo hace ConfigManager automáticamente)
-            
-            # Guardar movimientos del día en historial
-            for movimiento in registro_movimientos.obtener_movimientos_hoy():
-                self.guardar_historial(movimiento)
-            
-            return exito1
-        except Exception as e:
-            print(f"Error al guardar estado completo: {e}")
-            return False
-    
-    def crear_backup(self):
-        """
-        Crea una copia de seguridad de todos los datos
-        
-        Returns:
-            str: Ruta del backup o None si hay error
-        """
-        try:
-            # Crear carpeta de backups
             backup_dir = DATABASE_DIR / "backups"
             backup_dir.mkdir(exist_ok=True)
             
-            # Nombre del backup con timestamp
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            backup_name = f"backup_{timestamp}"
-            backup_path = backup_dir / backup_name
-            backup_path.mkdir(exist_ok=True)
+            backup_path = backup_dir / f"backup_{timestamp}"
+            backup_path.mkdir()
             
-            # Copiar archivos
-            archivos = [VEHICULOS_ACTIVOS_FILE, HISTORIAL_FILE]
-            for archivo in archivos:
+            for archivo in [VEHICULOS_ACTIVOS_FILE, HISTORIAL_FILE]:
                 if archivo.exists():
                     shutil.copy2(archivo, backup_path / archivo.name)
-            
             return str(backup_path)
-        except Exception as e:
-            print(f"Error al crear backup: {e}")
+        except Exception:
             return None
     
-    def limpiar_datos(self, confirmar=False):
-        """
-        Limpia todos los datos guardados (reinicia el sistema)
-        
-        Args:
-            confirmar: bool (debe ser True para ejecutar)
-        
-        Returns:
-            bool: True si se limpiaron correctamente
-        """
-        if not confirmar:
-            return False
-        
+    # ==================== HISTORIAL ====================
+    
+    def guardar_historial(self, movimiento: dict) -> bool:
+        """Guarda un movimiento en el historial"""
         try:
-            # Eliminar archivos de datos
-            archivos = [VEHICULOS_ACTIVOS_FILE, HISTORIAL_FILE]
-            for archivo in archivos:
-                if archivo.exists():
-                    archivo.unlink()
+            historial = self.cargar_historial_completo()
+            movimiento['fecha_registro'] = datetime.now().strftime(FORMATO_FECHA_HORA)
+            historial.append(movimiento)
             
+            # Mantener últimos 5000 movimientos
+            if len(historial) > 5000:
+                historial = historial[-5000:]
+            
+            with open(HISTORIAL_FILE, 'w', encoding='utf-8') as f:
+                json.dump(historial, f, indent=4, ensure_ascii=False)
             return True
-        except Exception as e:
-            print(f"Error al limpiar datos: {e}")
+        except Exception:
             return False
     
-    def obtener_estadisticas_historial(self):
-        """
-        Obtiene estadísticas del historial completo
-        
-        Returns:
-            dict: Estadísticas
-        """
+    def cargar_historial_completo(self) -> list:
+        """Carga todo el historial"""
+        if not HISTORIAL_FILE.exists():
+            return []
+        try:
+            with open(HISTORIAL_FILE, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception:
+            return []
+    
+    # ==================== ESTADO COMPLETO ====================
+    
+    def guardar_estado_completo(self, estacionamiento, registro_movimientos) -> bool:
+        """Guarda el estado completo"""
+        exito = self.guardar_vehiculos_activos(estacionamiento)
+        for m in registro_movimientos.obtener_movimientos_hoy()[-20:]:
+            self.guardar_historial(m)
+        self.crear_backup()
+        return exito
+    
+    # ==================== ESTADÍSTICAS ====================
+    
+    def obtener_estadisticas(self) -> dict:
+        """Obtiene estadísticas básicas"""
         historial = self.cargar_historial_completo()
-        
         ingresos = [m for m in historial if m.get('tipo') == 'INGRESO']
         salidas = [m for m in historial if m.get('tipo') == 'SALIDA']
-        total_recaudado = sum([m.get('total_pagado', 0) for m in salidas])
+        total = sum(m.get('total_pagado', 0) for m in salidas)
         
         return {
-            'total_ingresos_historicos': len(ingresos),
-            'total_salidas_historicas': len(salidas),
-            'total_recaudado_historico': total_recaudado,
-            'ultimo_movimiento': historial[-1] if historial else None
+            'total_ingresos': len(ingresos),
+            'total_salidas': len(salidas),
+            'total_recaudado': round(total, 2),
+            'promedio': round(total / len(salidas), 2) if salidas else 0
         }
+    
+    # ==================== MANTENIMIENTO ====================
+    
+    def limpiar_datos(self, confirmar=False) -> bool:
+        """Limpia todos los datos"""
+        if not confirmar:
+            return False
+        try:
+            for archivo in [VEHICULOS_ACTIVOS_FILE, HISTORIAL_FILE]:
+                if archivo.exists():
+                    archivo.unlink()
+            return True
+        except Exception:
+            return False

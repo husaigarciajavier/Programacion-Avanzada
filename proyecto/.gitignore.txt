@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Archivos de datos del estacionamiento (ignorar datos generados)
+src/database/data/*.json
+!src/database/data/.gitkeep
+
+# Logs y reportes generados
+logs/*.txt
+!logs/.gitkeep
+
+# Backups
+src/database/data/backups/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Archivos temporales
+*.log
+*.tmp
+*.bak
+*.cache
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos de prueba
+test_*.py
+*_test.py

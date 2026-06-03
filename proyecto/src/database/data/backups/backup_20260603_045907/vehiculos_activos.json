@@ -1,0 +1,19 @@
+{
+    "fecha_guardado": "2026-06-03 04:59:07",
+    "vehiculos": [
+        {
+            "id_unico": "384a6e6f-042720988",
+            "placa": "4545663",
+            "hora_ingreso": "2026-06-03 04:27:20",
+            "hora_salida": null,
+            "total_pagado": null
+        },
+        {
+            "id_unico": "4a2b3ac6-043834082",
+            "placa": "123214",
+            "hora_ingreso": "2026-06-03 04:38:34",
+            "hora_salida": null,
+            "total_pagado": null
+        }
+    ]
+}

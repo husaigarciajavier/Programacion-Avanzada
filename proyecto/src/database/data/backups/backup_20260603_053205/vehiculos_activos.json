@@ -1,0 +1,40 @@
+{
+    "fecha_guardado": "2026-06-03 05:32:05",
+    "vehiculos": [
+        {
+            "id_unico": "4a2b3ac6-043834082",
+            "placa": "123214",
+            "hora_ingreso": "2026-06-03 04:38:34",
+            "hora_salida": null,
+            "total_pagado": null
+        },
+        {
+            "id_unico": "0ac98ceb-051411121",
+            "placa": "123412",
+            "hora_ingreso": "2026-06-03 05:14:11",
+            "hora_salida": null,
+            "total_pagado": null
+        },
+        {
+            "id_unico": "a21b7a41-052038476",
+            "placa": "OLA1234",
+            "hora_ingreso": "2026-06-03 05:20:38",
+            "hora_salida": null,
+            "total_pagado": null
+        },
+        {
+            "id_unico": "7887ea0e-052632682",
+            "placa": "PRUE123",
+            "hora_ingreso": "2026-06-03 05:26:32",
+            "hora_salida": null,
+            "total_pagado": null
+        },
+        {
+            "id_unico": "a6a61d49-052823005",
+            "placa": "1341WW",
+            "hora_ingreso": "2026-06-03 05:28:23",
+            "hora_salida": null,
+            "total_pagado": null
+        }
+    ]
+}

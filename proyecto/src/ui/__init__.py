@@ -1,5 +1,5 @@
 """
-Módulo de interfaz de usuario del proyecto Estacionamiento
+Módulo de interfaz de usuario
 """
 
 from src.ui.ventana_principal import VentanaPrincipal

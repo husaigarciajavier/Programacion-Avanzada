@@ -1,242 +1,223 @@
 """
 Clase Estacionamiento - Gestiona la lógica del estacionamiento
+Optimizado con búsqueda O(1) y mejor encapsulamiento
 """
 
 import re
+from datetime import datetime
 from src.models.vehiculo import Vehiculo
 from src.utils.config_manager import ConfigManager
-from src.config.constants import PLACA_REGEX
+from src.config.constants import PLACA_REGEX, MAX_CAPACIDAD
 
 class Estacionamiento:
     """Clase principal que gestiona el estacionamiento"""
     
     def __init__(self):
         """Inicializa el estacionamiento con la configuración actual"""
-        self.config_manager = ConfigManager()
-        self.capacidad_maxima = self.config_manager.obtener_capacidad()
-        self.vehiculos = {}  # Diccionario {id_unico: Vehiculo}
-        self._espacios_ocupados = 0
+        self._config_manager = ConfigManager()
+        self._capacidad_maxima = self._config_manager.obtener_capacidad()
+        self._vehiculos = {}  # {id_unico: Vehiculo}
+        self._placas_activas = set()  # NUEVO: set para búsqueda O(1)
+        self._eventos_callbacks = []  # NUEVO: para eventos (ingreso/salida)
     
-    def _validar_placa(self, placa):
+    # ==================== PROPIEDADES ====================
+    
+    @property
+    def capacidad_maxima(self):
+        return self._capacidad_maxima
+    
+    @property
+    def vehiculos_activos(self):
+        """Retorna lista de vehículos actualmente dentro (cálculo en tiempo real)"""
+        return [v for v in self._vehiculos.values() if v.esta_dentro]
+    
+    @property
+    def total_vehiculos(self):
+        """Número de vehículos actualmente dentro"""
+        return len(self.vehiculos_activos)
+    
+    @property
+    def espacios_disponibles(self):
+        """Número de espacios libres"""
+        return self._capacidad_maxima - self.total_vehiculos
+    
+    @property
+    def ocupacion_porcentaje(self):
+        """Porcentaje de ocupación (0-100)"""
+        if self._capacidad_maxima == 0:
+            return 0
+        return (self.total_vehiculos / self._capacidad_maxima) * 100
+    
+    @property
+    def esta_lleno(self):
+        """bool: True si no hay espacios disponibles"""
+        return self.espacios_disponibles <= 0
+    
+    # ==================== EVENTOS ====================
+    
+    def registrar_evento(self, callback):
         """
-        Valida que la placa tenga un formato correcto
+        Registra una función callback para eventos (ingreso/salida)
         
         Args:
-            placa: str
-        
-        Returns:
-            bool: True si es válida
+            callback: función que recibe (tipo_evento, datos)
         """
-        if not placa or not isinstance(placa, str):
-            return False
-        return bool(re.match(PLACA_REGEX, placa.upper().strip()))
+        self._eventos_callbacks.append(callback)
     
-    def _vehiculo_ya_esta_dentro(self, placa):
-        """
-        Verifica si un vehículo con esa placa ya está dentro
-        
-        Args:
-            placa: str
-        
-        Returns:
-            bool: True si ya está estacionado
-        """
-        for vehiculo in self.vehiculos.values():
-            if vehiculo.esta_dentro() and vehiculo.placa == placa.upper().strip():
-                return True
-        return False
+    def _notificar_evento(self, tipo, datos):
+        """Notifica a todos los callbacks registrados"""
+        for callback in self._eventos_callbacks:
+            try:
+                callback(tipo, datos)
+            except Exception as e:
+                print(f"Error en callback: {e}")
+    
+    # ==================== MÉTODOS PRINCIPALES ====================
     
     def hay_espacio(self):
-        """
-        Verifica si hay espacios disponibles
-        
-        Returns:
-            bool: True si hay espacio
-        """
-        return len(self.obtener_vehiculos_activos()) < self.capacidad_maxima
+        """Verifica si hay espacios disponibles"""
+        return not self.esta_lleno
     
     def registrar_ingreso(self, placa):
         """
         Registra el ingreso de un nuevo vehículo
         
-        Args:
-            placa: str (placa del vehículo)
-        
         Returns:
             tuple: (éxito: bool, mensaje: str, vehiculo: Vehiculo o None)
         """
-        # Validar placa
-        if not self._validar_placa(placa):
-            return False, f"Placa inválida. Formato: 6-7 caracteres alfanuméricos (ej: ABC123)", None
-        
-        # Verificar si ya está dentro
-        if self._vehiculo_ya_esta_dentro(placa):
-            return False, f"El vehículo con placa {placa} ya se encuentra dentro del estacionamiento", None
-        
         # Verificar espacio
         if not self.hay_espacio():
-            return False, f"Estacionamiento lleno. Capacidad máxima: {self.capacidad_maxima} vehículos", None
+            return False, f"Estacionamiento lleno. Capacidad: {self._capacidad_maxima}", None
+        
+        # Validar placa (ahora el vehículo mismo la valida)
+        try:
+            vehiculo = Vehiculo(placa)
+        except ValueError as e:
+            return False, str(e), None
+        
+        # Verificar si ya está dentro (búsqueda O(1) con set)
+        if vehiculo.placa in self._placas_activas:
+            return False, f"El vehículo {placa} ya está dentro", None
         
         # Registrar ingreso
-        nuevo_vehiculo = Vehiculo(placa)
-        self.vehiculos[nuevo_vehiculo.id_unico] = nuevo_vehiculo
+        self._vehiculos[vehiculo.id_unico] = vehiculo
+        self._placas_activas.add(vehiculo.placa)
         
-        return True, f"Vehículo {placa} ingresado con ID: {nuevo_vehiculo.id_unico}", nuevo_vehiculo
+        # Notificar evento
+        self._notificar_evento('INGRESO', {
+            'placa': vehiculo.placa,
+            'id': vehiculo.id_unico,
+            'hora': vehiculo.hora_ingreso
+        })
+        
+        return True, f"✅ Vehículo {placa} ingresado. ID: {vehiculo.id_unico}", vehiculo
     
     def registrar_salida(self, id_unico, precio_por_hora=None):
         """
         Registra la salida de un vehículo
         
-        Args:
-            id_unico: str (ID del vehículo)
-            precio_por_hora: float (opcional, usa el actual si no se especifica)
-        
         Returns:
             tuple: (éxito: bool, mensaje: str, cobro: dict o None)
         """
         # Buscar vehículo
-        vehiculo = self.vehiculos.get(id_unico)
+        vehiculo = self._vehiculos.get(id_unico)
         
         if not vehiculo:
-            return False, f"No se encontró ningún vehículo con ID: {id_unico}", None
+            return False, f"❌ No se encontró vehículo con ID: {id_unico}", None
         
-        if not vehiculo.esta_dentro():
-            return False, f"El vehículo con ID {id_unico} ya salió del estacionamiento", None
+        if not vehiculo.esta_dentro:
+            return False, f"❌ El vehículo {vehiculo.placa} ya salió", None
         
         # Usar precio actual si no se especifica
         if precio_por_hora is None:
-            precio_por_hora = self.config_manager.obtener_precio()
+            precio_por_hora = self._config_manager.obtener_precio()
         
-        # Registrar salida y calcular cobro
-        cobro = vehiculo.registrar_salida(precio_por_hora)
-        
-        return True, f"Salida registrada. Total a pagar: ${cobro['total_pagado']:.2f}", cobro
+        # Registrar salida
+        try:
+            cobro = vehiculo.registrar_salida(precio_por_hora)
+            self._placas_activas.discard(vehiculo.placa)  # Remover del set
+            
+            # Notificar evento
+            self._notificar_evento('SALIDA', cobro)
+            
+            return True, f"✅ Salida registrada. Total: ${cobro['total_pagado']:.2f}", cobro
+        except ValueError as e:
+            return False, str(e), None
     
-    def obtener_vehiculos_activos(self):
+    def buscar_por_placa(self, placa):
         """
-        Retorna lista de vehículos actualmente dentro
+        Busca un vehículo por su placa (búsqueda O(n) pero con early exit)
         
         Returns:
-            list: Vehículos activos
+            Vehiculo or None
         """
-        return [v for v in self.vehiculos.values() if v.esta_dentro()]
+        placa_normalizada = placa.upper().strip()
+        for vehiculo in self._vehiculos.values():
+            if vehiculo.placa == placa_normalizada:
+                return vehiculo
+        return None
     
-    def obtener_vehiculos_historial(self):
-        """
-        Retorna lista de todos los vehículos (incluyendo los que salieron)
-        
-        Returns:
-            list: Todos los vehículos
-        """
-        return list(self.vehiculos.values())
+    def buscar_por_id(self, id_unico):
+        """Busca un vehículo por ID (búsqueda O(1) en diccionario)"""
+        return self._vehiculos.get(id_unico)
     
-    def obtener_espacios_disponibles(self):
-        """
-        Retorna el número de espacios disponibles
-        
-        Returns:
-            int: Espacios libres
-        """
-        return self.capacidad_maxima - len(self.obtener_vehiculos_activos())
+    def obtener_todos_vehiculos(self):
+        """Retorna todos los vehículos (historial completo)"""
+        return list(self._vehiculos.values())
     
-    def obtener_ocupacion(self):
-        """
-        Retorna el porcentaje de ocupación
-        
-        Returns:
-            float: Porcentaje ocupado
-        """
-        if self.capacidad_maxima == 0:
-            return 0
-        return (len(self.obtener_vehiculos_activos()) / self.capacidad_maxima) * 100
+    # ==================== CONFIGURACIÓN ====================
+    
+    def obtener_precio_actual(self):
+        """Retorna el precio por hora actual"""
+        return self._config_manager.obtener_precio()
+    
+    def obtener_configuracion(self):
+        """Retorna la configuración actual completa"""
+        return {
+            'capacidad_maxima': self._capacidad_maxima,
+            'precio_por_hora': self._config_manager.obtener_precio(),
+            'vehiculos_activos': self.total_vehiculos,
+            'espacios_disponibles': self.espacios_disponibles,
+            'ocupacion': self.ocupacion_porcentaje
+        }
     
     def actualizar_capacidad(self, nueva_capacidad):
         """
         Actualiza la capacidad máxima del estacionamiento
         
-        Args:
-            nueva_capacidad: int
-        
         Returns:
             tuple: (éxito: bool, mensaje: str)
         """
-        vehiculos_activos = len(self.obtener_vehiculos_activos())
+        if nueva_capacidad < self.total_vehiculos:
+            return False, f"❌ No se puede reducir a {nueva_capacidad} (hay {self.total_vehiculos} vehículos)"
         
-        exito, mensaje = self.config_manager.actualizar_capacidad(nueva_capacidad, vehiculos_activos)
+        exito, mensaje = self._config_manager.actualizar_capacidad(nueva_capacidad, self.total_vehiculos)
         
         if exito:
-            self.capacidad_maxima = nueva_capacidad
+            self._capacidad_maxima = nueva_capacidad
         
         return exito, mensaje
     
     def actualizar_precio(self, nuevo_precio):
-        """
-        Actualiza el precio por hora
-        
-        Args:
-            nuevo_precio: float
-        
-        Returns:
-            tuple: (éxito: bool, mensaje: str)
-        """
-        return self.config_manager.actualizar_precio(nuevo_precio)
+        """Actualiza el precio por hora"""
+        return self._config_manager.actualizar_precio(nuevo_precio)
     
-    def obtener_precio_actual(self):
-        """Retorna el precio por hora actual"""
-        return self.config_manager.obtener_precio()
-    
-    def obtener_configuracion(self):
-        """Retorna la configuración actual"""
-        return {
-            'capacidad_maxima': self.capacidad_maxima,
-            'precio_por_hora': self.config_manager.obtener_precio(),
-            'vehiculos_activos': len(self.obtener_vehiculos_activos()),
-            'espacios_disponibles': self.obtener_espacios_disponibles(),
-            'ocupacion': self.obtener_ocupacion()
-        }
-    
-    def buscar_vehiculo_por_placa(self, placa):
-        """
-        Busca un vehículo por su placa
-        
-        Args:
-            placa: str
-        
-        Returns:
-            Vehiculo or None: El vehículo encontrado
-        """
-        placa_normalizada = placa.upper().strip()
-        for vehiculo in self.vehiculos.values():
-            if vehiculo.placa == placa_normalizada:
-                return vehiculo
-        return None
-    
-    def buscar_vehiculo_por_id(self, id_unico):
-        """
-        Busca un vehículo por su ID único
-        
-        Args:
-            id_unico: str
-        
-        Returns:
-            Vehiculo or None: El vehículo encontrado
-        """
-        return self.vehiculos.get(id_unico)
+    # ==================== SERIALIZACIÓN ====================
     
     def to_dict(self):
-        """
-        Convierte el estado del estacionamiento a diccionario
-        """
+        """Convierte el estado a diccionario"""
         return {
-            'capacidad_maxima': self.capacidad_maxima,
-            'vehiculos': [v.to_dict() for v in self.vehiculos.values()]
+            'capacidad_maxima': self._capacidad_maxima,
+            'vehiculos': [v.to_dict() for v in self._vehiculos.values()]
         }
     
     def cargar_datos(self, vehiculos_dict):
-        """
-        Carga vehículos desde diccionario
-        """
-        self.vehiculos = {}
+        """Carga vehículos desde diccionario"""
+        self._vehiculos = {}
+        self._placas_activas = set()
+        
         for v_data in vehiculos_dict:
             vehiculo = Vehiculo.from_dict(v_data)
-            self.vehiculos[vehiculo.id_unico] = vehiculo
+            self._vehiculos[vehiculo.id_unico] = vehiculo
+            if vehiculo.esta_dentro:
+                self._placas_activas.add(vehiculo.placa)

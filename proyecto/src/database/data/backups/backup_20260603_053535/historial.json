@@ -1,0 +1,374 @@
+[
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-05-13 21:19:55",
+        "placa": "TISDHJK",
+        "id_unico": "c9a99764-211955876",
+        "espacios_disponibles": 31,
+        "fecha_registro": "2026-05-13 21:21:42"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-05-13 21:21:27",
+        "placa": "UWUNYA",
+        "id_unico": "01c60177-212127507",
+        "espacios_disponibles": 30,
+        "fecha_registro": "2026-05-13 21:21:42"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-05-13 21:19:55",
+        "placa": "TISDHJK",
+        "id_unico": "c9a99764-211955876",
+        "espacios_disponibles": 31,
+        "fecha_registro": "2026-05-13 21:22:03"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-05-13 21:21:27",
+        "placa": "UWUNYA",
+        "id_unico": "01c60177-212127507",
+        "espacios_disponibles": 30,
+        "fecha_registro": "2026-05-13 21:22:03"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-05-13 21:23:07",
+        "placa": "SISI231",
+        "id_unico": "0b6a923a-212307976",
+        "espacios_disponibles": 29,
+        "fecha_registro": "2026-05-13 21:23:28"
+    },
+    {
+        "tipo": "SALIDA",
+        "fecha_hora": "2026-06-01 07:18:28",
+        "placa": "SISI231",
+        "id_unico": "0b6a923a-212307976",
+        "horas_estadia": 441.92,
+        "total_pagado": 6628.8,
+        "espacios_disponibles": 23,
+        "fecha_registro": "2026-06-01 07:19:33"
+    },
+    {
+        "tipo": "SALIDA",
+        "fecha_hora": "2026-06-01 07:27:56",
+        "placa": "TISDHJK",
+        "id_unico": "c9a99764-211955876",
+        "horas_estadia": 442.13,
+        "total_pagado": 6631.95,
+        "espacios_disponibles": 24,
+        "fecha_registro": "2026-06-01 07:28:08"
+    },
+    {
+        "tipo": "SALIDA",
+        "fecha_hora": "2026-06-01 07:28:02",
+        "placa": "UWUNYA",
+        "id_unico": "01c60177-212127507",
+        "horas_estadia": 442.11,
+        "total_pagado": 6631.65,
+        "espacios_disponibles": 25,
+        "fecha_registro": "2026-06-01 07:28:08"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-06-01 16:46:45",
+        "placa": "EEEE22",
+        "id_unico": "d9206b21-164645477",
+        "espacios_disponibles": 98,
+        "fecha_registro": "2026-06-01 16:48:59"
+    },
+    {
+        "tipo": "SALIDA",
+        "fecha_hora": "2026-06-01 16:48:35",
+        "placa": "EEEE22",
+        "id_unico": "d9206b21-164645477",
+        "horas_estadia": 0.03,
+        "total_pagado": 20.0,
+        "espacios_disponibles": 99,
+        "fecha_registro": "2026-06-01 16:48:59"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-06-03 04:21:12",
+        "placa": "545455",
+        "id_unico": "da2ba9fe-042112240",
+        "espacios_disponibles": 49,
+        "fecha_registro": "2026-06-03 04:22:53"
+    },
+    {
+        "tipo": "SALIDA",
+        "fecha_hora": "2026-06-03 04:21:53",
+        "placa": "545455",
+        "id_unico": "da2ba9fe-042112240",
+        "horas_estadia": 0.01,
+        "total_pagado": 40.0,
+        "espacios_disponibles": 50,
+        "fecha_registro": "2026-06-03 04:22:53"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-06-03 04:25:05",
+        "placa": "231233",
+        "id_unico": "1d809b05-042505675",
+        "espacios_disponibles": 49,
+        "fecha_registro": "2026-06-03 04:25:20"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-06-03 04:26:50",
+        "placa": "234932",
+        "id_unico": "6e806573-042650134",
+        "espacios_disponibles": 48,
+        "fecha_registro": "2026-06-03 04:27:04"
+    },
+    {
+        "tipo": "SALIDA",
+        "fecha_hora": "2026-06-03 04:26:57",
+        "placa": "234932",
+        "id_unico": "6e806573-042650134",
+        "horas_estadia": 0.0,
+        "total_pagado": 0.0,
+        "espacios_disponibles": 49,
+        "fecha_registro": "2026-06-03 04:27:04"
+    },
+    {
+        "tipo": "SALIDA",
+        "fecha_hora": "2026-06-03 04:27:01",
+        "placa": "231233",
+        "id_unico": "1d809b05-042505675",
+        "horas_estadia": 0.03,
+        "total_pagado": 40.0,
+        "espacios_disponibles": 50,
+        "fecha_registro": "2026-06-03 04:27:04"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-06-03 04:27:20",
+        "placa": "4545663",
+        "id_unico": "384a6e6f-042720988",
+        "espacios_disponibles": 49,
+        "fecha_registro": "2026-06-03 04:27:36"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-06-03 04:38:34",
+        "placa": "123214",
+        "id_unico": "4a2b3ac6-043834082",
+        "espacios_disponibles": 48,
+        "fecha_registro": "2026-06-03 04:39:31"
+    },
+    {
+        "tipo": "SALIDA",
+        "fecha_hora": "2026-06-03 05:04:45",
+        "placa": "4545663",
+        "id_unico": "384a6e6f-042720988",
+        "horas_estadia": 0.62,
+        "total_pagado": 40.0,
+        "espacios_disponibles": 49,
+        "fecha_registro": "2026-06-03 05:07:10"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-06-03 05:06:23",
+        "placa": "UWUWU1",
+        "id_unico": "a2746fa3-050623711",
+        "espacios_disponibles": 48,
+        "fecha_registro": "2026-06-03 05:07:10"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-06-03 05:06:36",
+        "placa": "123141",
+        "id_unico": "df75d23c-050636851",
+        "espacios_disponibles": 47,
+        "fecha_registro": "2026-06-03 05:07:10"
+    },
+    {
+        "tipo": "SALIDA",
+        "fecha_hora": "2026-06-03 05:13:55",
+        "placa": "UWUWU1",
+        "id_unico": "a2746fa3-050623711",
+        "horas_estadia": 0.13,
+        "total_pagado": 5.0,
+        "espacios_disponibles": 48,
+        "fecha_registro": "2026-06-03 05:14:29"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-06-03 05:14:11",
+        "placa": "123412",
+        "id_unico": "0ac98ceb-051411121",
+        "espacios_disponibles": 47,
+        "fecha_registro": "2026-06-03 05:14:29"
+    },
+    {
+        "tipo": "SALIDA",
+        "fecha_hora": "2026-06-03 05:13:55",
+        "placa": "UWUWU1",
+        "id_unico": "a2746fa3-050623711",
+        "horas_estadia": 0.13,
+        "total_pagado": 5.0,
+        "espacios_disponibles": 48,
+        "fecha_registro": "2026-06-03 05:17:16"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-06-03 05:14:11",
+        "placa": "123412",
+        "id_unico": "0ac98ceb-051411121",
+        "espacios_disponibles": 47,
+        "fecha_registro": "2026-06-03 05:17:16"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-06-03 05:20:38",
+        "placa": "OLA1234",
+        "id_unico": "a21b7a41-052038476",
+        "espacios_disponibles": 46,
+        "fecha_registro": "2026-06-03 05:21:15"
+    },
+    {
+        "tipo": "SALIDA",
+        "fecha_hora": "2026-06-03 05:21:37",
+        "placa": "123141",
+        "id_unico": "df75d23c-050636851",
+        "horas_estadia": 0.25,
+        "total_pagado": 5.0,
+        "espacios_disponibles": 47,
+        "fecha_registro": "2026-06-03 05:23:06"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-06-03 05:22:57",
+        "placa": "AVSD145",
+        "id_unico": "ecd06141-052257562",
+        "espacios_disponibles": 46,
+        "fecha_registro": "2026-06-03 05:23:06"
+    },
+    {
+        "tipo": "SALIDA",
+        "fecha_hora": "2026-06-03 05:21:37",
+        "placa": "123141",
+        "id_unico": "df75d23c-050636851",
+        "horas_estadia": 0.25,
+        "total_pagado": 5.0,
+        "espacios_disponibles": 47,
+        "fecha_registro": "2026-06-03 05:23:17"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-06-03 05:22:57",
+        "placa": "AVSD145",
+        "id_unico": "ecd06141-052257562",
+        "espacios_disponibles": 46,
+        "fecha_registro": "2026-06-03 05:23:17"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-06-03 05:26:32",
+        "placa": "PRUE123",
+        "id_unico": "7887ea0e-052632682",
+        "espacios_disponibles": 45,
+        "fecha_registro": "2026-06-03 05:26:44"
+    },
+    {
+        "tipo": "SALIDA",
+        "fecha_hora": "2026-06-03 05:28:01",
+        "placa": "AVSD145",
+        "id_unico": "ecd06141-052257562",
+        "horas_estadia": 0.08,
+        "total_pagado": 5.0,
+        "espacios_disponibles": 46,
+        "fecha_registro": "2026-06-03 05:28:55"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-06-03 05:28:23",
+        "placa": "1341WW",
+        "id_unico": "a6a61d49-052823005",
+        "espacios_disponibles": 45,
+        "fecha_registro": "2026-06-03 05:28:55"
+    },
+    {
+        "tipo": "SALIDA",
+        "fecha_hora": "2026-06-03 05:28:01",
+        "placa": "AVSD145",
+        "id_unico": "ecd06141-052257562",
+        "horas_estadia": 0.08,
+        "total_pagado": 5.0,
+        "espacios_disponibles": 46,
+        "fecha_registro": "2026-06-03 05:29:06"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-06-03 05:28:23",
+        "placa": "1341WW",
+        "id_unico": "a6a61d49-052823005",
+        "espacios_disponibles": 45,
+        "fecha_registro": "2026-06-03 05:29:06"
+    },
+    {
+        "tipo": "SALIDA",
+        "fecha_hora": "2026-06-03 05:28:01",
+        "placa": "AVSD145",
+        "id_unico": "ecd06141-052257562",
+        "horas_estadia": 0.08,
+        "total_pagado": 5.0,
+        "espacios_disponibles": 46,
+        "fecha_registro": "2026-06-03 05:32:05"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-06-03 05:28:23",
+        "placa": "1341WW",
+        "id_unico": "a6a61d49-052823005",
+        "espacios_disponibles": 45,
+        "fecha_registro": "2026-06-03 05:32:05"
+    },
+    {
+        "tipo": "SALIDA",
+        "fecha_hora": "2026-06-03 05:28:01",
+        "placa": "AVSD145",
+        "id_unico": "ecd06141-052257562",
+        "horas_estadia": 0.08,
+        "total_pagado": 5.0,
+        "espacios_disponibles": 46,
+        "fecha_registro": "2026-06-03 05:34:24"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-06-03 05:28:23",
+        "placa": "1341WW",
+        "id_unico": "a6a61d49-052823005",
+        "espacios_disponibles": 45,
+        "fecha_registro": "2026-06-03 05:34:24"
+    },
+    {
+        "tipo": "SALIDA",
+        "fecha_hora": "2026-06-03 05:28:01",
+        "placa": "AVSD145",
+        "id_unico": "ecd06141-052257562",
+        "horas_estadia": 0.08,
+        "total_pagado": 5.0,
+        "espacios_disponibles": 46,
+        "fecha_registro": "2026-06-03 05:35:35"
+    },
+    {
+        "tipo": "INGRESO",
+        "fecha_hora": "2026-06-03 05:28:23",
+        "placa": "1341WW",
+        "id_unico": "a6a61d49-052823005",
+        "espacios_disponibles": 45,
+        "fecha_registro": "2026-06-03 05:35:35"
+    },
+    {
+        "tipo": "SALIDA",
+        "fecha_hora": "2026-06-03 05:34:45",
+        "placa": "OLA1234",
+        "id_unico": "a21b7a41-052038476",
+        "horas_estadia": 0.24,
+        "total_pagado": 5.0,
+        "espacios_disponibles": 46,
+        "fecha_registro": "2026-06-03 05:35:35"
+    }
+]
