@@ -1,8 +1,8 @@
 {
     "fecha": "2026-06-03",
-    "total_ingresos": 3,
-    "total_salidas": 5,
-    "total_recaudado": 29.0,
+    "total_ingresos": 5,
+    "total_salidas": 7,
+    "total_recaudado": 444.0,
     "movimientos": [
         {
             "tipo": "SALIDA",
@@ -69,7 +69,39 @@
             "horas_estadia": 0.28,
             "total_pagado": 9.0,
             "espacios_disponibles": 47
+        },
+        {
+            "tipo": "INGRESO",
+            "fecha_hora": "2026-06-03 12:18:19",
+            "placa": "YBL109C",
+            "id_unico": "557e728a-121819770",
+            "espacios_disponibles": 46
+        },
+        {
+            "tipo": "SALIDA",
+            "fecha_hora": "2026-06-03 12:18:34",
+            "placa": "PRUE432",
+            "id_unico": "a5361a00-054511600",
+            "horas_estadia": 6.56,
+            "total_pagado": 140.0,
+            "espacios_disponibles": 47
+        },
+        {
+            "tipo": "INGRESO",
+            "fecha_hora": "2026-06-03 15:40:24",
+            "placa": "YIUYUI8",
+            "id_unico": "87bfc66d-154024567",
+            "espacios_disponibles": 21
+        },
+        {
+            "tipo": "SALIDA",
+            "fecha_hora": "2026-06-03 15:40:51",
+            "placa": "123412",
+            "id_unico": "0ac98ceb-051411121",
+            "horas_estadia": 10.44,
+            "total_pagado": 275.0,
+            "espacios_disponibles": 22
         }
     ],
-    "ultima_actualizacion": "2026-06-03 05:45:23"
+    "ultima_actualizacion": "2026-06-03 15:40:51"
 }
