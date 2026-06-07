@@ -1,0 +1,38 @@
+Fecha: Junio de 2026
+Materia: Programación Avanzada
+Proyecto: Sistema de Gestión de Estacionamiento
+
+================================================================================
+
+Por medio de este documento, los integrantes del equipo declaramos que:
+
+1. El código presentado es de nuestra autoría y desarrollo propio.
+
+2. Se han respetado los derechos de autor y las licencias de software utilizadas.
+
+3. El proyecto ha sido desarrollado de manera colaborativa, con las contribuciones
+   descritas en el archivo credits.md.
+
+4. Autorizamos la reproducción y presentación del código fuente, diagramas y
+   documentación con fines académicos.
+
+================================================================================
+
+INTEGRANTES:
+
+Nombre completo: Eunice Husai Garcia Javier
+Firma digital: Eunice Husai Garcia Javier
+Fecha: Junio 2026
+
+Nombre completo: Joel Aldair Morales Martinez
+Firma digital: Joel Aldair Morales Martinez
+Fecha: Junio 2026
+
+Nombre completo: [Nombre del tercer integrante]
+Firma digital: [Firma del tercer integrante]
+Fecha: Junio 2026
+
+================================================================================
+
+Aceptamos los términos descritos anteriormente.
+
