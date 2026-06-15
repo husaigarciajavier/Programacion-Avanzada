@@ -192,10 +192,10 @@ python proyecto/src/main.py
 - GitHub: [@husaigarciajavier](https://github.com/husaigarciajavier)
 
 **Joel Aldair Morales Martinez**
-- GitHub: 
+- GitHub: [@jmora1304](https://github.com/jmora1304)
 
 **Anessa Miranda Peredo Garcia**
-- GitHub: 
+- GitHub: [@anne384](https://github.com/anne384)
 
 
 

@@ -1,0 +1,26 @@
+{
+    "fecha": "2026-06-14",
+    "total_ingresos": 1,
+    "total_salidas": 1,
+    "total_recaudado": 5300.0,
+    "movimientos": [
+        {
+            "tipo": "INGRESO",
+            "fecha_hora": "2026-06-14 10:39:23",
+            "placa": "YBX6U7",
+            "id_unico": "4b3e8305-103923822",
+            "espacios_disponibles": 26,
+            "fecha_registro": "2026-06-14 10:39:50"
+        },
+        {
+            "tipo": "SALIDA",
+            "fecha_hora": "2026-06-14 12:49:21",
+            "placa": "YBL109C",
+            "id_unico": "557e728a-121819770",
+            "horas_estadia": 264.52,
+            "total_pagado": 5300.0,
+            "espacios_disponibles": 27
+        }
+    ],
+    "ultima_actualizacion": "2026-06-14 12:49:21"
+}

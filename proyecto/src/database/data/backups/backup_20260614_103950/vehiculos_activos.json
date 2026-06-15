@@ -1,10 +1,17 @@
 {
-    "fecha_guardado": "2026-06-14 12:49:42",
+    "fecha_guardado": "2026-06-14 10:39:50",
     "vehiculos": [
         {
             "id_unico": "4a2b3ac6-043834082",
             "placa": "123214",
             "hora_ingreso": "2026-06-03 04:38:34",
+            "hora_salida": null,
+            "total_pagado": null
+        },
+        {
+            "id_unico": "557e728a-121819770",
+            "placa": "YBL109C",
+            "hora_ingreso": "2026-06-03 12:18:19",
             "hora_salida": null,
             "total_pagado": null
         },
