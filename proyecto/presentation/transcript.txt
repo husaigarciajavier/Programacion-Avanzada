@@ -1,0 +1,98 @@
+TRANSCRIPCIÓN COMPLETA - PRESENTACIÓN SISTEMA DE ESTACIONAMIENTO
+Duración: 4 minutos aproximadamente
+Fecha: Junio 2026
+Materia: Programación Avanzada
+Integrantes: Anessa Peredo, Husai Garcia, Joel Morales
+
+================================================================================
+
+[00:00:00 - 00:00:06] ANESSA:
+Buenos días. Presentamos el sistema de gestión de estacionamiento.
+
+[00:00:06 - 00:00:10] ANESSA:
+Desarrollado en Python con interfaz gráfica en Tkinter.
+
+[00:00:11 - 00:00:22] ANESSA:
+El sistema permite registrar vehículos, controlar tiempos de estadía, procesar
+pagos con redondeo hacia arriba y generar reportes diarios con persistencia en JSON.
+
+[00:00:30 - 00:00:42] ANESSA:
+Yo fui responsable de la estructura del proyecto y la integración con la base de
+datos. Organicé el proyecto en una estructura de capas para mantener el código
+limpio y mantenible.
+
+[00:00:46 - 00:00:58] ANESSA:
+La separación: configuración, database, models, gui y utils permite que cada
+módulo sea independiente.
+
+[00:01:04 - 00:01:15] ANESSA:
+Si alguien quiere modificar la interfaz, no afecta a la base de datos. Si cambia
+la lógica de negocio, no afecta a la interfaz.
+
+[00:01:16 - 00:01:26] ANESSA:
+Para mantener un orden, implementé un sistema basado en archivos JSON. Cada día
+se genera un archivo diferente.
+
+[00:01:26 - 00:01:37] ANESSA:
+Los datos se guardan automáticamente después de cada ingreso o salida y se
+recuperan al iniciar la aplicación. También implementé un sistema de guardados
+automáticos.
+
+================================================================================
+
+[00:01:37 - 00:01:47] HUSAI:
+Yo trabajé en los archivos configurables, la interfaz gráfica completa y la
+optimización del sistema.
+
+[00:01:47 - 00:01:57] HUSAI:
+Centralicé todas las constantes del sistema en constants.py para que sean
+fácilmente modificables.
+
+[00:01:58 - 00:02:09] HUSAI:
+El usuario puede cambiar la capacidad y el precio desde la interfaz y
+config_manager.py guarda esos cambios en JSON sin necesidad de reiniciar la
+aplicación.
+
+[00:02:17 - 00:02:26] HUSAI:
+La ventana de registro de vehículos valida la placa, asigna un ID único y
+verifica los espacios disponibles.
+
+[00:02:28 - 00:02:33] HUSAI:
+La ventana principal muestra toda la información en tiempo real.
+
+[00:02:33 - 00:02:46] HUSAI:
+Además, se optimizó la mayoría de códigos. En total, se redujo el código en un
+39%, pasando aproximadamente de 2500 líneas a 1500 líneas.
+
+[00:02:47 - 00:03:02] HUSAI:
+También implementé el redondeo hacia arriba para el cobro. Si un vehículo estuvo
+una hora con tres minutos, se cobran dos horas porque ya es una hora de fracción
+completa.
+
+================================================================================
+
+[00:03:04 - 00:03:15] JOEL:
+Yo fui responsable de los módulos de utilidades, la base de datos en tiempo real,
+agrupación de interfaces y la documentación del proyecto.
+
+[00:03:16 - 00:03:19] JOEL:
+El generador de IDs asegura que nunca se repitan.
+
+[00:03:20 - 00:03:29] JOEL:
+La utilidad del tiempo calcula duraciones, formatea tiempos y aplica la política
+de redondeo hacia arriba usando math.ceil.
+
+[00:03:32 - 00:03:35] JOEL:
+Implementé un sistema de guardado inmediato.
+
+[00:03:36 - 00:03:46] JOEL:
+Cada movimiento se guarda en el archivo JSON al instante. No se pierden datos,
+ni siquiera si la aplicación falla.
+
+[00:03:48 - 00:04:05] JOEL:
+Centralicé la exportación de todas las ventanas a __init__.py para simplificar
+las importaciones en el resto del proyecto.
+
+================================================================================
+FIN DE LA TRANSCRIPCIÓN
+================================================================================

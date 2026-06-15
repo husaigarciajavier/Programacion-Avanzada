@@ -1,0 +1,215 @@
+1
+00:00:00,420 --> 00:00:06,100
+[melodía alegre] Buenos días. Presentamos
+el sistema de gestión de estacionamiento
+
+2
+00:00:06,520 --> 00:00:10,220
+desarrollado en Python con interfaz
+gráfica en Tkinter.
+
+3
+00:00:11,100 --> 00:00:15,200
+El sistema permite registrar vehículos,
+
+4
+00:00:16,720 --> 00:00:22,520
+controlar tiempos de estadía, procesar
+pagos con redondeo hacia arriba
+
+5
+00:00:22,620 --> 00:00:27,700
+y generar reportes diarios con
+persistencia en JSON.
+
+6
+00:00:30,420 --> 00:00:35,700
+Yo fui responsable de la estructura del
+proyecto y la integración
+
+7
+00:00:36,300 --> 00:00:42,120
+con la base de datos. Organicé el
+proyecto en una estructura de capas
+
+8
+00:00:42,360 --> 00:00:45,720
+para mantener el código limpio y
+mantenible.
+
+9
+00:00:46,480 --> 00:00:52,440
+La separación, configuración, database,
+
+10
+00:00:52,680 --> 00:00:58,380
+models, gui y utils permite que cada
+
+11
+00:00:58,460 --> 00:01:04,080
+módulo sea independiente. Si alguien
+quiere modificar la
+
+12
+00:01:04,160 --> 00:01:10,020
+interfaz, no afecta a la base de datos.
+Si cambia la lógica de
+
+13
+00:01:10,100 --> 00:01:15,620
+negocio, pero no afecta a la interfaz.
+Para mantener un orden,
+
+14
+00:01:16,160 --> 00:01:20,080
+implementé un sistema basado en archivos
+JSON.
+
+15
+00:01:21,820 --> 00:01:26,840
+Cada día se genera un archivo diferente.
+Los datos se guardan
+
+16
+00:01:26,920 --> 00:01:32,680
+automáticamente después de cada ingreso o
+salida de este y
+
+17
+00:01:32,980 --> 00:01:37,560
+se recuperan al iniciar la aplicación.
+También implementé un sistema de
+
+18
+00:01:37,640 --> 00:01:43,560
+guardados automáticos. Yo trabajé en los
+archivos configurables, la
+
+19
+00:01:43,640 --> 00:01:47,200
+interfaz gráfica completa, la
+optimización del sistema.
+
+20
+00:01:47,830 --> 00:01:52,180
+Centralicé todas las constantes del
+sistema en constantes
+
+21
+00:01:53,100 --> 00:01:57,940
+contant.py para que sean fácilmente
+modificables.
+
+22
+00:01:58,620 --> 00:02:04,580
+El usuario puede cambiar la capacidad y
+el precio desde la interfaz y configurar
+
+23
+00:02:04,700 --> 00:02:09,538
+en config manager.py. Guarda esos cambios
+en el JSON
+
+24
+00:02:11,200 --> 00:02:17,060
+y también sin necesidad de
+
+25
+00:02:17,140 --> 00:02:21,720
+reiniciar la aplicación. La ventana de
+registros de los vehículos valida la
+
+26
+00:02:21,860 --> 00:02:26,400
+placa, asigna un ID único y verifica los
+espacios disponibles.
+
+27
+00:02:28,280 --> 00:02:33,280
+La ventana principal muestra toda la
+información en tiempo real.
+
+28
+00:02:33,360 --> 00:02:38,000
+Además, se optimizó la mayoría de códigos.
+En total, se redujo el código como un
+
+29
+00:02:38,100 --> 00:02:43,760
+treinta y nueve%,
+pasando aproximadamente de dos mil
+
+30
+00:02:43,860 --> 00:02:46,100
+quinientas líneas a mil quinientas
+líneas.
+
+31
+00:02:47,000 --> 00:02:51,480
+También implementé el redondeo hacia
+arriba para el cobro.
+
+32
+00:02:51,560 --> 00:02:57,160
+Si un vehículo estuvo una hora con tres
+minutos, se cobran como dos horas, porque
+
+33
+00:02:57,240 --> 00:03:02,500
+pues ya es una hora de fracción completa.
+Y eso fue lo que me tocó a mí.
+
+34
+00:03:04,560 --> 00:03:10,340
+Yo fui el responsable de los módulos de
+utilidades, la base de datos en tiempo
+
+35
+00:03:10,420 --> 00:03:15,160
+real, agrupación de interfaces y la
+documentación del proyecto.
+
+36
+00:03:16,080 --> 00:03:19,920
+El generador de IDs asegura que nunca se
+repitan.
+
+37
+00:03:20,900 --> 00:03:25,780
+La utilidad del tiempo calcula
+duraciones, formatea tiempos y aplica la
+
+38
+00:03:25,900 --> 00:03:29,980
+política de redondeo hacia arriba usando
+math cell.
+
+39
+00:03:32,780 --> 00:03:35,100
+Implementé un sistema de guardado
+inmediato.
+
+40
+00:03:36,260 --> 00:03:41,960
+Cada movimiento se guarda en el
+en el archivo JSON al
+
+41
+00:03:42,040 --> 00:03:46,360
+instante. No se pierden datos, ni
+siquiera si la aplicación falla.
+
+42
+00:03:48,520 --> 00:03:54,380
+Centralicé la exportación de todas las
+ventanas a
+
+43
+00:03:54,660 --> 00:04:00,340
+/unit.py para simplificar
+
+44
+00:04:00,420 --> 00:04:05,000
+las importaciones en el resto del
+proyecto.
+
