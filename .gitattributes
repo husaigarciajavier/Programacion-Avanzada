@@ -2,3 +2,4 @@ presentation/video_final.mp4 filter=lfs diff=lfs merge=lfs -text
 presentation/*.mp4 filter=lfs diff=lfs merge=lfs -text
 proyecto/presentation/final_video.mp4 filter=lfs diff=lfs merge=lfs -text
 *.mp4 filter=lfs diff=lfs merge=lfs -text
+proyecto/presentation/*.mp4 filter=lfs diff=lfs merge=lfs -text
